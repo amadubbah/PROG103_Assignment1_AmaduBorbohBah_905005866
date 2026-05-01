@@ -7,12 +7,22 @@ def add_record(records):
         return
     student_id = input("Enter Student ID: ")
     name = input("Enter Student Name: ")
-    try:
-        grade = float(input("Enter Student Grade: "))
-    except ValueError:
-        print("Invalid grade. Please enter a number.")
-        return
-    records.append({"ID": student_id, "Name": name, "Grade": grade})
+
+    subjects = {}
+    subjects_names = ["maths", "physics", "chemistry"]
+
+
+    for subject in subjects_names:
+        while True:
+            try:
+                grade = float(input(f"Enter Student Grade for {subject}: "))
+                subjects[subject] = grade
+                break
+            except ValueError:
+                print("Invalid grade. Please enter a number.")
+                return
+
+    records.append({"ID": student_id, "Name": name, "Subjects": subjects})
     print("Record added successfully!")
 
 # Function to view all student records
@@ -22,7 +32,7 @@ def view_records(records):
     else:
         print("\n--- Student Records ---")
         for student in records:
-            print(f"ID: {student['ID']}, Name: {student['Name']}, Grade: {student['Grade']}")
+            print(f"ID: {student['ID']}, Name: {student['Name']}, Subjects and Grades: {student['Subjects']}")
 
 # Function to calculate average grade
 def calculate_average(records):
